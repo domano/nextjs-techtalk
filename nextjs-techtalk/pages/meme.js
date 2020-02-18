@@ -1,13 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import Nav from '../../components/nav'
-import { useRouter } from 'next/router';
+import Nav from '../components/nav'
 
-const Techtalk = () => {
-    const router = useRouter();
-
-
-    return (
+const Techtalk = () => (
   <div>
     <Head>
       <title>Techtalk</title>
@@ -17,9 +12,9 @@ const Techtalk = () => {
     <Nav />
 
     <div className="hero">
-        <h1 className="title">Das hier ist Post Nummer {router.query.id}!
-        </h1>
-
+      <h1 className="title">
+          <img src={"/schöneswettermeme.jpg"}/>
+      </h1>
     </div>
 
     <style jsx>{`
@@ -69,7 +64,6 @@ const Techtalk = () => {
       }
     `}</style>
   </div>
-    )
-}
+)
 
 export default Techtalk

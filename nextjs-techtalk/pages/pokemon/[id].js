@@ -1,9 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
 import Nav from '../../components/nav'
+import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
 
-const Techtalk = () => {
+const Pokemon = (props) => {
     const router = useRouter();
 
 
@@ -17,7 +18,9 @@ const Techtalk = () => {
     <Nav />
 
     <div className="hero">
-        <h1 className="title">Das hier ist Post Nummer {router.query.id}!
+        <h1 className="title">Das hier ist Pokemon Nummer {router.query.id}!
+            <br/>
+            {Object.values(props.sprites).filter(e => e!=null).map(e => <img src={e}/>)}
         </h1>
 
     </div>
@@ -72,4 +75,12 @@ const Techtalk = () => {
     )
 }
 
-export default Techtalk
+Pokemon.getInitialProps = async function(context) {
+    const { id } = context.query;
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon/'+id);
+    const data = await res.json();
+
+    return data;
+};
+
+export default Pokemon
